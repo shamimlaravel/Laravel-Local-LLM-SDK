@@ -36,11 +36,14 @@
     ======================================== */
 
 /* Single scroll document model - no forced scrollbars */
-html, body {
+html {
     scroll-behavior: smooth;
+}
+
+html, body {
     overflow-x: visible;
-    overflow-y: visible;
-    overscroll-behavior: auto;
+    overflow-y: hidden; /* Remove default scrollbar from body */
+    overscroll-behavior-y: auto;
     max-width: 100%;
     width: 100%;
     min-height: 100%;
@@ -48,53 +51,80 @@ html, body {
     padding: 0;
 }
 
-/* All elements - scrollbar styling */
-* {
+/* Only main content and sidebar get scrollbars */
+main, aside {
+    overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: var(--primary) transparent;
 }
 
-/* Webkit scrollbar */
-*::-webkit-scrollbar {
+/* Webkit scrollbar for main and sidebar only */
+main::-webkit-scrollbar,
+aside::-webkit-scrollbar {
     width: var(--scrollbar-width);
-    height: var(--scrollbar-width);
 }
 
-*::-webkit-scrollbar-track {
+main::-webkit-scrollbar-track,
+aside::-webkit-scrollbar-track {
     background: transparent;
     border-radius: var(--scrollbar-radius);
 }
 
-*::-webkit-scrollbar-thumb {
+main::-webkit-scrollbar-thumb,
+aside::-webkit-scrollbar-thumb {
     background: var(--scrollbar-color);
     border-radius: var(--scrollbar-radius);
     border: 2px solid transparent;
     background-clip: padding-box;
 }
 
-*::-webkit-scrollbar-thumb:hover {
+main::-webkit-scrollbar-thumb:hover,
+aside::-webkit-scrollbar-thumb:hover {
     background: var(--scrollbar-color);
     filter: brightness(1.1);
 }
 
-*::-webkit-scrollbar-thumb:active {
+main::-webkit-scrollbar-thumb:active,
+aside::-webkit-scrollbar-thumb:active {
     filter: brightness(0.95);
 }
 
-*::-webkit-scrollbar-button {
+main::-webkit-scrollbar-button,
+aside::-webkit-scrollbar-button {
     display: none;
 }
 
-*::-webkit-scrollbar-corner {
+main::-webkit-scrollbar-corner,
+aside::-webkit-scrollbar-corner {
     background: transparent;
 }
 
-/* Firefox specific */
+/* Firefox specific for main and sidebar */
 @supports (-moz-appearance: none) {
-    html, body {
+    main, aside {
         scrollbar-width: thin;
         scrollbar-color: var(--primary) transparent;
     }
+}
+
+/* Prevent scrollbars on all other elements */
+header, footer, nav, section, article, div {
+    overflow: visible;
+}
+
+/* Exceptions for specific content that needs scrolling */
+pre code,
+.code-block,
+.overflow-content {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* Ensure nested containers don't create scrollbars */
+main *, aside * {
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 
 /* Container overflow protection */
@@ -104,6 +134,16 @@ form, input, textarea, select, button, p, h1, h2, h3,
 h4, h5, h6, span, a, img, pre, code {
     max-width: 100%;
     overflow-x: hidden;
+}
+
+/* Layout wrapper - ensures flex container doesn't scroll */
+.flex.md\:flex-row,
+.md\:flex {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
 /* ========================================
@@ -781,12 +821,33 @@ main {
 }
 
 /* ========================================
+   MAIN CONTENT SCROLL AREA
+   ======================================== */
+main {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    min-height: 100vh;
+    overscroll-behavior: none;
+    flex: 1;
+}
+
+/* ========================================
    SIDEBAR SCROLL AREA
    ======================================== */
-aside, aside nav {
-    overflow-y: scroll !important;
+aside {
+    overflow-y: auto !important;
     overflow-x: hidden !important;
-    height: 100%;
+    height: 100vh;
+    overscroll-behavior: none;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sidebar navigation should take remaining space and scroll */
+aside nav {
+    flex: 1;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
     overscroll-behavior: none;
 }
 
@@ -3746,6 +3807,8 @@ img {
     transform: translate(-50%, -50%);
     transition: width 0.3s, height 0.3s, background-color 0.3s;
     mix-blend-mode: difference;
+    will-change: transform;
+    contain: layout style size;
 }
 
 .dark .mouse-follower {
@@ -3817,10 +3880,11 @@ img {
     top: 0;
     left: 0;
     height: 3px;
-    background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+    background: linear-gradient(90deg, #4f46e5, #6366f1, #8b5cf6);
     width: 0%;
-    z-index: 100;
-    transition: width 0.1s ease;
+    z-index: 10000;
+    transition: width 0.1s ease-out;
+    pointer-events: none;
 }
 
 /* Reveal animations */
@@ -3909,35 +3973,51 @@ img {
 }
 
 /* Scroll to top button */
-.scroll-to-top {
+#back-to-top {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
     width: 3rem;
     height: 3rem;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
     border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+    z-index: 9998;
+    pointer-events: none;
     opacity: 0;
     transform: translateY(20px);
-    pointer-events: none;
-    z-index: 50;
 }
 
-.scroll-to-top.visible {
-    opacity: 1;
-    transform: translateY(0);
+#back-to-top.visible,
+#back-to-top:hover {
     pointer-events: auto;
 }
 
-.scroll-to-top:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+#back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#back-to-top:hover {
+    background: linear-gradient(135deg, #4338ca, #4f46e5);
+    box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.5);
+    transform: translateY(-2px);
+}
+
+#back-to-top:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px 0 rgba(79, 70, 229, 0.3);
+}
+
+#back-to-top:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
 }
 
 /* Touch auto for overlay */
