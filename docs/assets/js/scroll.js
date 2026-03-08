@@ -169,23 +169,35 @@
         constructor() {
             this.btn = document.getElementById('back-to-top');
             this.t = CONFIG.backToTop.threshold;
+            this.visible = false;
         }
 
         init() {
             if (!this.btn) return;
             this.update();
-            this.btn.onclick = () => smoothScrollTo(document.body, { offset: 0 });
+            this.btn.onclick = (e) => {
+                e.preventDefault();
+                smoothScrollTo(document.body, { offset: 0 });
+            };
             window.addEventListener('scroll', throttle(() => this.update(), 100), { passive: true });
         }
 
         update() {
             if (!this.btn) return;
             const show = window.scrollY > this.t;
-            this.btn.classList.toggle('opacity-100', show);
-            this.btn.classList.toggle('translate-y-0', show);
-            this.btn.classList.toggle('opacity-0', !show);
-            this.btn.classList.toggle('translate-y-4', !show);
-            this.btn.classList.toggle('invisible', !show && this.btn.classList.contains('opacity-0'));
+            
+            // Prevent unnecessary DOM updates (fixes flickering)
+            if (show === this.visible) return;
+            
+            this.visible = show;
+            
+            if (show) {
+                this.btn.classList.remove('opacity-0', 'translate-y-4', 'invisible');
+                this.btn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                this.btn.classList.add('opacity-0', 'translate-y-4', 'invisible');
+                this.btn.classList.remove('opacity-100', 'translate-y-0');
+            }
         }
     }
 
