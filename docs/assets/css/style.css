@@ -1,0 +1,4061 @@
+/* Custom Styles for Laravel Local LLM SDK Documentation */
+
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-light: #818cf8;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #06b6d4;
+    --sidebar-width: 280px;
+    --header-height: 56px;
+    --scrollbar-width: 10px;
+    --scrollbar-radius: 5px;
+    --scrollbar-color: linear-gradient(180deg, #6366f1, #8b5cf6);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --border: #374151;
+    --scrollbar-color: linear-gradient(180deg, #8b5cf6, #a855f7);
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+/* ========================================
+    SCROLL SYSTEM v2.0 - IMPROVED
+    ======================================== */
+
+/* Single scroll document model - no forced scrollbars */
+html, body {
+    scroll-behavior: smooth;
+    overflow-x: visible;
+    overflow-y: visible;
+    overscroll-behavior: auto;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* All elements - scrollbar styling */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+}
+
+/* Webkit scrollbar */
+*::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    height: var(--scrollbar-width);
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: var(--scrollbar-radius);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color);
+    border-radius: var(--scrollbar-radius);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-color);
+    filter: brightness(1.1);
+}
+
+*::-webkit-scrollbar-thumb:active {
+    filter: brightness(0.95);
+}
+
+*::-webkit-scrollbar-button {
+    display: none;
+}
+
+*::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Firefox specific */
+@supports (-moz-appearance: none) {
+    html, body {
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) transparent;
+    }
+}
+
+/* Container overflow protection */
+div, section, article, main, aside, nav, header, footer, 
+ul, ol, li, table, thead, tbody, tr, td, th,
+form, input, textarea, select, button, p, h1, h2, h3, 
+h4, h5, h6, span, a, img, pre, code {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   BACK TO TOP BUTTON
+   ======================================== */
+#back-to-top {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+}
+
+#back-to-top:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.5);
+}
+
+#back-to-top:active {
+    transform: translateY(0);
+}
+
+#back-to-top:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4);
+}
+
+/* Visible state (added by JS) */
+#back-to-top.visible {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* ========================================
+    SECTION SCROLL OFFSET
+    ======================================== */
+/* Scroll margin for anchor navigation - accounts for sticky header */
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+html {
+    scroll-behavior: auto;
+    scroll-padding-top: 80px;
+}
+
+@media (max-width: 767px) {
+    section[id] {
+        scroll-margin-top: 64px;
+    }
+    
+    html {
+        scroll-padding-top: 64px;
+    }
+}
+
+/* Ensure scrolling works on all devices */
+@media (pointer: coarse) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* ========================================
+   SCROLL CONTAINER AREAS
+   ======================================== */
+.scroll-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.scroll-container-x {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 100%;
+}
+
+.scroll-container-both {
+    overflow: scroll;
+}
+
+/* ========================================
+   SCROLL SNAP
+   ======================================== */
+.snap-container {
+    scroll-snap-type: y mandatory;
+    -webkit-scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.snap-container-x {
+    scroll-snap-type: x mandatory;
+    -webkit-scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    width: 100%;
+}
+
+.snap-item {
+    scroll-snap-align: start;
+    -webkit-scroll-snap-align: start;
+}
+
+.snap-item-center {
+    scroll-snap-align: center;
+    -webkit-scroll-snap-align: center;
+}
+
+.snap-item-end {
+    scroll-snap-align: end;
+    -webkit-scroll-snap-align: end;
+}
+
+/* ========================================
+   SCROLL UTILITIES
+   ======================================== */
+.scroll-smooth { scroll-behavior: smooth; }
+.scroll-auto { scroll-behavior: auto; }
+.scroll-unset { scroll-behavior: unset; }
+
+.scroll-top { scroll-snap-align: start; }
+.scroll-center { scroll-snap-align: center; }
+.scroll-bottom { scroll-snap-align: end; }
+
+.overflow-visible { overflow: visible; }
+.overflow-hidden { overflow: hidden; }
+.overflow-scroll { overflow: scroll; }
+.overflow-auto { overflow: auto; }
+
+.overflow-x-visible { overflow-x: visible; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-x-scroll { overflow-x: scroll; }
+.overflow-x-auto { overflow-x: auto; }
+
+.overflow-y-visible { overflow-y: visible; }
+.overflow-y-hidden { overflow-y: hidden; }
+.overflow-y-scroll { overflow-y: scroll; }
+.overflow-y-auto { overflow-y: auto; }
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Custom scrollbar colors */
+.scrollbar-primary { scrollbar-color: var(--primary) transparent; }
+.scrollbar-success { scrollbar-color: var(--success) transparent; }
+.scrollbar-warning { scrollbar-color: var(--warning) transparent; }
+.scrollbar-danger { scrollbar-color: var(--danger) transparent; }
+.scrollbar-info { scrollbar-color: var(--info) transparent; }
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+}
+
+.scrollbar-success::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #10b981, #34d399);
+}
+
+.scrollbar-warning::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #f59e0b, #fbbf24);
+}
+
+.scrollbar-danger::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ef4444, #f87171);
+}
+
+.scrollbar-info::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #06b6d4, #22d3ee);
+}
+
+/* ========================================
+   SCROLL ANIMATIONS
+   ======================================== */
+@keyframes scrollReveal {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scrollSlideLeft {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scrollSlideRight {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scrollScaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.animate-scroll-reveal {
+    animation: scrollReveal 0.6s ease forwards;
+}
+
+.animate-scroll-fade {
+    animation: scrollFadeIn 0.6s ease forwards;
+}
+
+.animate-scroll-left {
+    animation: scrollSlideLeft 0.6s ease forwards;
+}
+
+.animate-scroll-right {
+    animation: scrollSlideRight 0.6s ease forwards;
+}
+
+.animate-scroll-scale {
+    animation: scrollScaleIn 0.6s ease forwards;
+}
+
+/* ========================================
+   SCROLL INDICATORS
+   ======================================== */
+.scroll-indicator-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.scroll-indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+}
+
+.scroll-indicator-dot.active {
+    background: var(--primary);
+    transform: scale(1.3);
+}
+
+.scroll-indicator-line {
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    transition: width 0.3s ease;
+}
+
+/* ========================================
+   SCROLL TO TOP/BOTTOM
+   ======================================== */
+.scroll-to-top,
+.scroll-to-bottom {
+    position: fixed;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.scroll-to-top:hover,
+.scroll-to-bottom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.scroll-to-top { top: 80%; right: 20px; }
+.scroll-to-bottom { top: 90%; right: 20px; }
+
+/* ========================================
+   FULL PARALLAX SCROLLING SYSTEM
+   ======================================== */
+
+/* Parallax base */
+.parallax-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.parallax-element {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.parallax-slow {
+    animation: parallaxFloat 20s ease-in-out infinite;
+}
+
+.parallax-medium {
+    animation: parallaxFloat 15s ease-in-out infinite;
+}
+
+.parallax-fast {
+    animation: parallaxFloat 10s ease-in-out infinite;
+}
+
+@keyframes parallaxFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(20px) rotate(-5deg);
+    }
+}
+
+/* Parallax scroll effect */
+.parallax-scroll {
+    transition: transform 0.1s ease-out;
+}
+
+/* Parallax depth layers */
+.parallax-layer-0 { z-index: 0; }
+.parallax-layer-1 { z-index: 1; }
+.parallax-layer-2 { z-index: 2; }
+.parallax-layer-3 { z-index: 3; }
+.parallax-layer-4 { z-index: 4; }
+
+/* Parallax positions */
+.parallax-top-left { top: -200px; left: -200px; }
+.parallax-top-right { top: -200px; right: -200px; }
+.parallax-bottom-left { bottom: -200px; left: -200px; }
+.parallax-bottom-right { bottom: -200px; right: -200px; }
+.parallax-center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+/* Parallax sizes */
+.parallax-xs { width: 100px; height: 100px; }
+.parallax-sm { width: 200px; height: 200px; }
+.parallax-md { width: 300px; height: 300px; }
+.parallax-lg { width: 400px; height: 400px; }
+.parallax-xl { width: 500px; height: 500px; }
+.parallax-full { width: 100%; height: 100%; }
+
+/* Parallax colors */
+.parallax-indigo { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.parallax-purple { background: linear-gradient(135deg, #8b5cf6, #a855f7); }
+.parallax-pink { background: linear-gradient(135deg, #ec4899, #f472b6); }
+.parallax-blue { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+.parallax-cyan { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+.parallax-green { background: linear-gradient(135deg, #10b981, #34d399); }
+.parallax-yellow { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+.parallax-orange { background: linear-gradient(135deg, #f97316, #fb923c); }
+
+/* Parallax opacity */
+.parallax-opacity-10 { opacity: 0.1; }
+.parallax-opacity-20 { opacity: 0.2; }
+.parallax-opacity-30 { opacity: 0.3; }
+.parallax-opacity-40 { opacity: 0.4; }
+.parallax-opacity-50 { opacity: 0.5; }
+
+/* Parallax blur */
+.parallax-blur-sm { filter: blur(30px); }
+.parallax-blur-md { filter: blur(60px); }
+.parallax-blur-lg { filter: blur(100px); }
+.parallax-blur-xl { filter: blur(150px); }
+
+/* Parallax section backgrounds */
+.parallax-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Parallax cards */
+.parallax-card {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.parallax-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.parallax-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--success));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.parallax-card:hover::before {
+    opacity: 1;
+}
+
+/* Parallax scroll trigger */
+.parallax-trigger {
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 2;
+}
+
+.parallax-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+/* Fullscreen parallax hero */
+.parallax-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+/* Parallax orbs */
+.parallax-orb {
+    position: absolute;
+    border-radius: 50%;
+    animation: orbFloat 8s ease-in-out infinite;
+}
+
+.parallax-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent 70%);
+    top: -100px;
+    right: -100px;
+    animation-delay: 0s;
+}
+
+.parallax-orb-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent 70%);
+    bottom: -50px;
+    left: -50px;
+    animation-delay: -4s;
+}
+
+.parallax-orb-3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.2), transparent 70%);
+    top: 50%;
+    left: 20%;
+    animation-delay: -2s;
+}
+
+@keyframes orbFloat {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+}
+
+/* Parallax mouse move effect */
+.parallax-mouse {
+    perspective: 1000px;
+}
+
+.parallax-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+
+/* Parallax gradient overlays */
+.parallax-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(99, 102, 241, 0.1) 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+}
+
+.parallax-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+    pointer-events: none;
+}
+
+/* Responsive parallax */
+@media (max-width: 768px) {
+    .parallax-element {
+        opacity: 0.3;
+    }
+    
+    .parallax-lg,
+    .parallax-xl {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .parallax-orb-1 {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .parallax-orb-2 {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .parallax-orb-3 {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Disable parallax on mobile for performance */
+@media (max-width: 1024px) {
+    .parallax-element,
+    .parallax-orb {
+        animation: none !important;
+    }
+    
+    .parallax-scroll {
+        transform: none !important;
+    }
+}
+
+[data-theme="dark"] {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --border: #374151;
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+/* ========================================
+   BASE SCROLL SETTINGS - NO CHAINING
+   ======================================== */
+html, body {
+    scroll-behavior: smooth;
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none !important;
+}
+
+/* ========================================
+   PROFESSIONAL SCROLLBAR - ALL ELEMENTS
+   ======================================== */
+* {
+    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: #6366f1 transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c3aed, #a855f7);
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, #4f46e5, #7c3aed);
+}
+
+*::-webkit-scrollbar-button {
+    display: none;
+}
+
+*::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* ========================================
+   CONTAINER OVERFLOW PREVENTION
+   ======================================== */
+div, section, article, main, aside, nav, header, footer, 
+ul, ol, li, table, thead, tbody, tr, td, th,
+form, input, textarea, select, button, p, h1, h2, h3, 
+h4, h5, h6, span, a, img, pre, code {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   MAIN CONTENT SCROLL AREA
+   ======================================== */
+main {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    height: 100%;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   SIDEBAR SCROLL AREA
+   ======================================== */
+aside, aside nav {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    height: 100%;
+    overscroll-behavior: none;
+}
+
+/* ========================================
+   SCROLL UTILITY CLASSES
+   ======================================== */
+.overflow-auto-chain {
+    overflow: auto;
+    overscroll-behavior: auto;
+}
+
+.no-scroll-chain {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.h-screen-scrollable {
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.h-full-scrollable {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden !important;
+    max-width: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden !important;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+}
+
+/* Base responsive - ensure full containment */
+html, body {
+    scroll-behavior: smooth;
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ensure html and body are full height */
+html {
+    height: auto;
+    min-height: 100%;
+}
+
+body {
+    height: auto;
+    min-height: 100%;
+}
+
+/* All containers - prevent inline scroll, proper scroll containment */
+div, section, article, main, aside, nav, header, footer, 
+ul, ol, li, table, thead, tbody, tr, td, th,
+form, input, textarea, select, button, p, h1, h2, h3, 
+h4, h5, h6, span, a, img, pre, code {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Prevent scroll chaining - all scrollable elements */
+* {
+    -ms-overflow-style: none;
+    scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c3aed, #a855f7);
+}
+
+*::-webkit-scrollbar-button {
+    display: none;
+}
+
+*::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Ensure main content scrolls properly */
+main {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    height: 100%;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+/* Sidebar proper scrolling */
+aside {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    height: 100%;
+    overscroll-behavior: none;
+}
+
+aside nav {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: none;
+}
+
+/* Reset overscroll to prevent chain */
+body, html {
+    overscroll-behavior: none !important;
+    -webkit-overflow-scrolling: auto !important;
+}
+
+/* Prevent scroll chaining on all scrollable elements */
+div, section, article {
+    overscroll-behavior: none;
+}
+
+/* Full height scrolling containers */
+.h-screen-scrollable {
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.h-full-scrollable {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* Auto scroll - let browser handle it */
+.overflow-auto-chain {
+    overflow: auto;
+    overscroll-behavior: auto;
+}
+
+/* No scroll chaining */
+.no-scroll-chain {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Responsive container classes */
+.container-responsive {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .container-responsive {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container-responsive {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        max-width: 1000px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .container-responsive {
+        max-width: 1200px;
+    }
+}
+
+@media (min-width: 1536px) {
+    .container-responsive {
+        max-width: 1400px;
+    }
+}
+
+/* Full width responsive */
+.w-full-responsive {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Responsive text sizes */
+.text-responsive {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+    .text-responsive {
+        font-size: 1.125rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .text-responsive {
+        font-size: 1.25rem;
+    }
+}
+
+/* Responsive spacing */
+.p-responsive {
+    padding: 1rem;
+}
+
+@media (min-width: 640px) {
+    .p-responsive {
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .p-responsive {
+        padding: 2rem;
+    }
+}
+
+.m-responsive {
+    margin: 1rem;
+}
+
+@media (min-width: 640px) {
+    .m-responsive {
+        margin: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .m-responsive {
+        margin: 2rem;
+    }
+}
+
+/* Responsive grid */
+.grid-responsive {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+    .grid-responsive {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-responsive {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .grid-responsive {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Responsive flex */
+.flex-responsive {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .flex-responsive {
+        flex-direction: row;
+    }
+}
+
+/* Hide on mobile */
+@media (max-width: 639px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Hide on tablet */
+@media (min-width: 640px) and (max-width: 1023px) {
+    .hide-tablet {
+        display: none !important;
+    }
+}
+
+/* Hide on desktop */
+@media (min-width: 1024px) {
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+/* Show on mobile only */
+@media (min-width: 640px) {
+    .show-mobile-only {
+        display: none !important;
+    }
+}
+
+@media (min-width: 640px) {
+    .show-tablet-only {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .show-desktop-only {
+        display: none !important;
+    }
+}
+
+/* Responsive typography */
+.text-xs-responsive { font-size: 0.75rem; }
+.text-sm-responsive { font-size: 0.875rem; }
+.text-base-responsive { font-size: 1rem; }
+.text-lg-responsive { font-size: 1.125rem; }
+.text-xl-responsive { font-size: 1.25rem; }
+.text-2xl-responsive { font-size: 1.5rem; }
+.text-3xl-responsive { font-size: 1.875rem; }
+.text-4xl-responsive { font-size: 2.25rem; }
+.text-5xl-responsive { font-size: 3rem; }
+
+@media (min-width: 640px) {
+    .sm\:text-xs-responsive { font-size: 0.75rem; }
+    .sm\:text-sm-responsive { font-size: 0.875rem; }
+    .sm\:text-base-responsive { font-size: 1rem; }
+    .sm\:text-lg-responsive { font-size: 1.125rem; }
+    .sm\:text-xl-responsive { font-size: 1.25rem; }
+    .sm\:text-2xl-responsive { font-size: 1.5rem; }
+    .sm\:text-3xl-responsive { font-size: 1.875rem; }
+    .sm\:text-4xl-responsive { font-size: 2.25rem; }
+    .sm\:text-5xl-responsive { font-size: 3rem; }
+}
+
+@media (min-width: 768px) {
+    .md\:text-xs-responsive { font-size: 0.75rem; }
+    .md\:text-sm-responsive { font-size: 0.875rem; }
+    .md\:text-base-responsive { font-size: 1rem; }
+    .md\:text-lg-responsive { font-size: 1.125rem; }
+    .md\:text-xl-responsive { font-size: 1.25rem; }
+    .md\:text-2xl-responsive { font-size: 1.5rem; }
+    .md\:text-3xl-responsive { font-size: 1.875rem; }
+    .md\:text-4xl-responsive { font-size: 2.25rem; }
+    .md\:text-5xl-responsive { font-size: 3rem; }
+}
+
+@media (min-width: 1024px) {
+    .lg\:text-xs-responsive { font-size: 0.75rem; }
+    .lg\:text-sm-responsive { font-size: 0.875rem; }
+    .lg\:text-base-responsive { font-size: 1rem; }
+    .lg\:text-lg-responsive { font-size: 1.125rem; }
+    .lg\:text-xl-responsive { font-size: 1.25rem; }
+    .lg\:text-2xl-responsive { font-size: 1.5rem; }
+    .lg\:text-3xl-responsive { font-size: 1.875rem; }
+    .lg\:text-4xl-responsive { font-size: 2.25rem; }
+    .lg\:text-5xl-responsive { font-size: 3rem; }
+}
+
+/* Responsive margins */
+.m-0-responsive { margin: 0; }
+.m-1-responsive { margin: 0.25rem; }
+.m-2-responsive { margin: 0.5rem; }
+.m-4-responsive { margin: 1rem; }
+.m-8-responsive { margin: 2rem; }
+
+@media (min-width: 640px) {
+    .sm\:m-0-responsive { margin: 0; }
+    .sm\:m-1-responsive { margin: 0.25rem; }
+    .sm\:m-2-responsive { margin: 0.5rem; }
+    .sm\:m-4-responsive { margin: 1rem; }
+    .sm\:m-8-responsive { margin: 2rem; }
+}
+
+@media (min-width: 768px) {
+    .md\:m-0-responsive { margin: 0; }
+    .md\:m-1-responsive { margin: 0.25rem; }
+    .md\:m-2-responsive { margin: 0.5rem; }
+    .md\:m-4-responsive { margin: 1rem; }
+    .md\:m-8-responsive { margin: 2rem; }
+}
+
+/* Responsive padding */
+.p-0-responsive { padding: 0; }
+.p-1-responsive { padding: 0.25rem; }
+.p-2-responsive { padding: 0.5rem; }
+.p-4-responsive { padding: 1rem; }
+.p-8-responsive { padding: 2rem; }
+
+@media (min-width: 640px) {
+    .sm\:p-0-responsive { padding: 0; }
+    .sm\:p-1-responsive { padding: 0.25rem; }
+    .sm\:p-2-responsive { padding: 0.5rem; }
+    .sm\:p-4-responsive { padding: 1rem; }
+    .sm\:p-8-responsive { padding: 2rem; }
+}
+
+@media (min-width: 768px) {
+    .md\:p-0-responsive { padding: 0; }
+    .md\:p-1-responsive { padding: 0.25rem; }
+    .md\:p-2-responsive { padding: 0.5rem; }
+    .md\:p-4-responsive { padding: 1rem; }
+    .md\:p-8-responsive { padding: 2rem; }
+}
+
+/* Restore scrollbar only on main content */
+main {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.6) rgba(0, 0, 0, 0.1);
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+main::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+main::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    border-left: 3px solid transparent;
+}
+
+main::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+main::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    box-shadow: inset 0 0 5px rgba(99, 102, 241, 0.3);
+}
+
+main::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c3aed, #a855f7);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+main::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, #4f46e5, #7c3aed);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+/* Arrow scrollbar styling */
+main::-webkit-scrollbar-button {
+    display: none;
+}
+
+main::-webkit-scrollbar-button:vertical:start:decrement,
+main::-webkit-scrollbar-button:vertical:end:increment {
+    display: none;
+}
+
+/* Dark mode scrollbar */
+[data-theme="dark"] main::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid transparent;
+}
+
+[data-theme="dark"] main::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #8b5cf6, #a855f7);
+    box-shadow: inset 0 0 5px rgba(139, 92, 246, 0.3);
+}
+
+[data-theme="dark"] main::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #a855f7, #c084fc);
+}
+
+[data-theme="dark"] main::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, #7c3aed, #8b5cf6);
+}
+
+/* Firefox scrollbar */
+@supports (scrollbar-width: thin) {
+    main {
+        scrollbar-color: rgba(99, 102, 241, 0.6) rgba(0, 0, 0, 0.1);
+    }
+    
+    [data-theme="dark"] main {
+        scrollbar-color: rgba(139, 92, 246, 0.6) rgba(255, 255, 255, 0.05);
+    }
+}
+
+/* Scroll features and utilities */
+.scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
+}
+
+.scroll-auto {
+    scroll-behavior: auto;
+    -webkit-scroll-behavior: auto;
+}
+
+.scroll-snap {
+    scroll-snap-type: y mandatory;
+    -webkit-scroll-snap-type: y mandatory;
+}
+
+.scroll-snap-both {
+    scroll-snap-type: y both;
+    -webkit-scroll-snap-type: y both;
+}
+
+.scroll-snap-start {
+    scroll-snap-align: start;
+    -webkit-scroll-snap-align: start;
+}
+
+.scroll-snap-center {
+    scroll-snap-align: center;
+    -webkit-scroll-snap-align: center;
+}
+
+.scroll-snap-end {
+    scroll-snap-align: end;
+    -webkit-scroll-snap-align: end;
+}
+
+/* Scroll margin for sections */
+.scroll-mt-0 { scroll-margin-top: 0; }
+.scroll-mt-4 { scroll-margin-top: 1rem; }
+.scroll-mt-8 { scroll-margin-top: 2rem; }
+.scroll-mt-12 { scroll-margin-top: 3rem; }
+.scroll-mt-16 { scroll-margin-top: 4rem; }
+.scroll-mt-20 { scroll-margin-top: 5rem; }
+.scroll-mt-24 { scroll-margin-top: 6rem; }
+
+/* Scroll padding */
+.scroll-pt-0 { scroll-padding-top: 0; }
+.scroll-pt-4 { scroll-padding-top: 1rem; }
+.scroll-pt-8 { scroll-padding-top: 2rem; }
+.scroll-pt-12 { scroll-padding-top: 3rem; }
+.scroll-pt-16 { scroll-padding-top: 4rem; }
+.scroll-pt-20 { scroll-padding-top: 5rem; }
+
+/* Scroll margin bottom */
+.scroll-mb-0 { scroll-margin-bottom: 0; }
+.scroll-mb-4 { scroll-margin-bottom: 1rem; }
+.scroll-mb-8 { scroll-margin-bottom: 2rem; }
+.scroll-mb-12 { scroll-margin-bottom: 3rem; }
+.scroll-mb-16 { scroll-margin-bottom: 4rem; }
+
+/* Scroll margin left */
+.scroll-ml-0 { scroll-margin-left: 0; }
+.scroll-ml-4 { scroll-margin-left: 1rem; }
+.scroll-ml-8 { scroll-margin-left: 2rem; }
+
+/* Scroll margin right */
+.scroll-mr-0 { scroll-margin-right: 0; }
+.scroll-mr-4 { scroll-margin-right: 1rem; }
+.scroll-mr-8 { scroll-margin-right: 2rem; }
+
+/* Smooth scroll to anchor */
+html {
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
+}
+
+/* Scroll overflow directions */
+.overflow-scroll { overflow: scroll; }
+.overflow-auto { overflow: auto; }
+.overflow-x-scroll { overflow-x: scroll; }
+.overflow-y-scroll { overflow-y: scroll; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-y-auto { overflow-y: auto; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-y-hidden { overflow-y: hidden; }
+.overflow-visible { overflow: visible; }
+
+/* Custom scrollbar utilities */
+.scrollbar-thin {
+    scrollbar-width: thin;
+}
+
+.scrollbar-auto {
+    scrollbar-width: auto;
+}
+
+.scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.4);
+    border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.6);
+}
+
+/* Custom scrollbar - thick */
+.scrollbar-thick::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.scrollbar-thick::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+}
+
+.scrollbar-thick::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.scrollbar-thick::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c3aed, #a855f7);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-bounce 2s infinite;
+}
+
+@keyframes scroll-bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* Scroll-based reveal animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-down {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-down.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Reveal delay utilities */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* Scroll-based fade */
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Parallax scroll effect */
+.parallax {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.parallax-slow {
+    transform: translateZ(0);
+    will-change: transform;
+    animation: parallax-slow 10s ease-in-out infinite;
+}
+
+@keyframes parallax-slow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.parallax-fast {
+    animation: parallax-fast 3s ease-in-out infinite;
+}
+
+@keyframes parallax-fast {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Scroll spy highlight */
+.scroll-spy-active {
+    position: relative;
+}
+
+.scroll-spy-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 0 2px 2px 0;
+}
+
+/* Scroll snap containers with custom styling */
+.scroll-snap-container {
+    scroll-snap-type: y mandatory;
+    -webkit-scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.scroll-snap-item {
+    scroll-snap-align: start;
+    -webkit-scroll-snap-align: start;
+    scroll-snap-stop: always;
+    -webkit-scroll-snap-stop: always;
+}
+
+/* Scroll progress bar - full width */
+.scroll-progress-full {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+    z-index: 1000;
+    transform-origin: 0%;
+    transform: scaleX(0);
+    transition: transform 0.1s linear;
+}
+
+/* Scroll to element */
+.scroll-to {
+    scroll-margin-top: 2rem;
+    scroll-behavior: smooth;
+}
+
+/* Smooth scroll on click */
+.smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but keep functionality */
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Horizontal scroll container */
+.scroll-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.scroll-x::-webkit-scrollbar {
+    height: 6px;
+}
+
+.scroll-x::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scroll-x::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.4);
+    border-radius: 3px;
+}
+
+/* Scroll shadows */
+.scroll-shadow-top {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, transparent 100%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.scroll-shadow-bottom {
+    background: linear-gradient(to top, rgba(0,0,0,0.1) 0%, transparent 100%);
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+/* Scroll break */
+.scroll-break-before {
+    page-break-before: always;
+    break-before: always;
+}
+
+.scroll-break-after {
+    page-break-after: always;
+    break-after: always;
+}
+
+/* Sidebar has visible scrollbar - handled above in Fixed Sidebar section */
+
+/* Global overflow containment */
+#app, .app-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+
+/* Hide scrollbar but allow scrolling */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Prevent all scrolling overflow issues */
+.overflow-none {
+    overflow: hidden !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+/* Contain overflow at root level */
+.overflow-contained {
+    overflow: hidden !important;
+    max-width: 100vw !important;
+}
+
+/* Safe area for floating elements */
+.floating-container {
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+/* Ensure parallax elements don't cause overflow */
+.parallax-element {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* No overflow on any container */
+.container-safe {
+    overflow: hidden !important;
+    max-width: 100% !important;
+}
+
+/* Custom scrollbar styling */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
+}
+
+/* Ensure all containers don't overflow */
+div, section, article, main, aside, nav, header, footer {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Screen Container - Full width with proper containment */
+.screen-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+/* Layout Container */
+.layout-container {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    width: calc(100% - var(--sidebar-width));
+    max-width: calc(100% - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+    overflow-x: hidden;
+}
+
+@media (max-width: 1023px) {
+    .main-content {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* Code Blocks */
+.code-block {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.code-block pre {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.625;
+}
+
+.code-block:hover .copy-btn {
+    opacity: 1;
+}
+
+.copy-btn {
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Sidebar - Fixed position with proper overflow handling */
+.sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+}
+
+/* Fixed Sidebar - Full View */
+aside {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 100%;
+    z-index: 40;
+    background: white;
+    border-right: 1px solid #e5e7eb;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sidebar nav - visible scrollbar */
+aside nav {
+    flex: 1;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.4) rgba(0, 0, 0, 0.05);
+    overscroll-behavior: contain;
+}
+
+aside nav::-webkit-scrollbar {
+    width: 6px;
+}
+
+aside nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+aside nav::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.4);
+    border-radius: 3px;
+}
+
+aside nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.6);
+}
+
+/* Dark mode sidebar scrollbar */
+[data-theme="dark"] aside nav {
+    scrollbar-color: rgba(139, 92, 246, 0.4) rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] aside nav::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.4);
+}
+
+[data-theme="dark"] aside nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.6);
+}
+
+[data-theme="dark"] aside {
+    background: #111827;
+    border-right-color: #374151;
+}
+
+/* Mobile sidebar - hidden by default */
+@media (max-width: 1023px) {
+    aside {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        width: 280px;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    aside.open {
+        transform: translateX(0);
+    }
+}
+
+/* Desktop sidebar - always visible */
+@media (min-width: 1024px) {
+    aside {
+        transform: translateX(0);
+    }
+    
+    aside:hover {
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* Main content with fixed sidebar */
+main {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+    max-width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.5) transparent;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+@media (max-width: 1023px) {
+    main {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* Responsive container */
+.content-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+@media (min-width: 640px) {
+    .content-container {
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .content-container {
+        max-width: 80rem;
+        padding: 2rem;
+    }
+}
+
+/* Container max-width for better readability */
+.container-narrow {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-medium {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-wide {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-full {
+    max-width: 1536px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 1.75rem !important;
+    }
+    
+    h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    h3 {
+        font-size: 1.25rem !important;
+    }
+    
+    p {
+        font-size: 0.875rem;
+    }
+    
+    /* Stack grids on mobile */
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Cards full width on mobile */
+    .rounded-xl {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+        border-radius: 0.5rem !important;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    h1 {
+        font-size: 2.25rem !important;
+    }
+    
+    h2 {
+        font-size: 1.875rem !important;
+    }
+}
+
+/* Section spacing responsive */
+section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    section {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    section {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* Code blocks responsive */
+pre {
+    font-size: 0.75rem;
+    padding: 0.75rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 640px) {
+    pre {
+        font-size: 0.875rem;
+        padding: 1rem;
+    }
+}
+
+/* Interactive Request Flow Canvas */
+.flow-canvas {
+    position: relative;
+    min-height: 300px;
+}
+
+/* Improved margins for all containers */
+.section-container {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .section-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .section-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .section-container {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+/* Remove default margins and use padding instead */
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+}
+
+/* Card improvements */
+.card {
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+}
+
+@media (min-width: 640px) {
+    .card {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Better spacing utilities */
+.gap-safe {
+    gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .gap-safe {
+        gap: 1rem;
+    }
+}
+
+/* Token calculator styles */
+.token-result {
+    transition: all 0.3s ease;
+}
+
+.token-result:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* Improved section spacing */
+section {
+    margin-bottom: 2rem;
+}
+
+section + section {
+    margin-top: 1rem;
+}
+
+/* Better container centering */
+.center-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+/* Remove unwanted margins on mobile */
+@media (max-width: 640px) {
+    .mb-4, .mb-6, .mb-8, .mb-12 {
+        margin-bottom: 1rem !important;
+    }
+    
+    .mt-4, .mt-6, .mt-8, .mt-12 {
+        margin-top: 1rem !important;
+    }
+    
+    .py-8, .py-10, .py-12 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+}
+
+/* Grid gap improvements */
+.gap-4 {
+    gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+    .gap-4 {
+        gap: 1rem;
+    }
+}
+
+/* Card margin fixes */
+.rounded-xl {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Better grid for responsive */
+@media (max-width: 639px) {
+    .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+    .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* Better text alignment on mobile */
+@media (max-width: 640px) {
+    .text-center {
+        text-align: center !important;
+    }
+    
+    .text-left {
+        text-align: left !important;
+    }
+}
+
+/* Fix for max-w containers */
+.max-w-2xl {
+    max-width: 42rem;
+}
+
+.max-w-4xl {
+    max-width: 56rem;
+}
+
+.max-w-7xl {
+    max-width: 80rem;
+}
+
+.max-w-8xl {
+    max-width: 88rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Container max-width helpers */
+.max-w-full {
+    max-width: 100%;
+}
+
+/* All overflow fixes */
+.overflow-fix {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+}
+
+.flow-node {
+    transition: all 0.3s ease;
+}
+
+.flow-node:hover {
+    transform: scale(1.05);
+}
+
+.flow-arrow {
+    position: relative;
+    overflow: hidden;
+}
+
+.flow-arrow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: flow-arrow 2s infinite;
+}
+
+@keyframes flow-arrow {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Live demo console */
+.console-output {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    line-height: 1.6;
+}
+
+.console-output .keyword { color: #c678dd; }
+.console-output .string { color: #98c379; }
+.console-output .number { color: #d19a66; }
+.console-output .comment { color: #5c6370; font-style: italic; }
+.console-output .success { color: #98c379; }
+.console-output .error { color: #e06c75; }
+.console-output .warning { color: #e5c07b; }
+.console-output .info { color: #61afef; }
+
+/* Flow animation steps */
+.flow-step {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: flow-step-reveal 0.5s ease forwards;
+}
+
+.flow-step:nth-child(1) { animation-delay: 0.1s; }
+.flow-step:nth-child(2) { animation-delay: 0.3s; }
+.flow-step:nth-child(3) { animation-delay: 0.5s; }
+.flow-step:nth-child(4) { animation-delay: 0.7s; }
+
+@keyframes flow-step-reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulsing glow effect */
+.glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+}
+
+aside {
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+}
+
+aside::-webkit-scrollbar {
+    width: 4px;
+}
+
+aside::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+aside::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 4px;
+}
+
+aside::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
+}
+
+/* Main Content Parallax Container */
+main {
+    will-change: transform;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Ensure content doesn't overflow */
+main > * {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Disable parallax transform on mobile to prevent overflow */
+@media (max-width: 1023px) {
+    main {
+        transform: none !important;
+    }
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 2px;
+}
+
+/* Cards */
+.card {
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Tables */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+
+[data-theme="dark"] th {
+    background: #1f2937;
+}
+
+/* Syntax Highlighting Overrides */
+.hljs {
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Focus States */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #4b5563;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Print Styles */
+@media print {
+    header, aside, .copy-btn {
+        display: none !important;
+    }
+    
+    main {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    section {
+        page-break-inside: avoid;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    section {
+        scroll-margin-top: 5rem;
+    }
+}
+
+/* Dark Mode Toggle Animation */
+.dark-mode-toggle {
+    transition: transform 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    transform: rotate(15deg);
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+}
+
+.badge:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation Active State */
+nav a {
+    position: relative;
+}
+
+nav a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: var(--primary);
+    border-radius: 0 2px 2px 0;
+}
+
+/* Code Copy Feedback */
+.copy-btn.copied {
+    background: var(--success) !important;
+}
+
+/* Search Highlight */
+.search-highlight {
+    background-color: #fef08a;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+/* Table of Contents */
+.toc-link {
+    position: relative;
+    padding-left: 1rem;
+}
+
+.toc-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--primary);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.toc-link.active::before,
+.toc-link:hover::before {
+    opacity: 1;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Glass Effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Scrollbar for Code */
+pre::-webkit-scrollbar {
+    height: 6px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+pre::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 3px;
+}
+
+/* ============================================
+   PARALLAX SCROLLING EFFECTS
+   ============================================ */
+
+/* Parallax Backgrounds */
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    z-index: -1;
+}
+
+.parallax-bg-1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.parallax-bg-2 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.parallax-bg-3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.parallax-bg-4 {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.parallax-bg-5 {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+/* Parallax Elements */
+.parallax-element {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.parallax-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.parallax-float-delay-1 { animation-delay: 1s; }
+.parallax-float-delay-2 { animation-delay: 2s; }
+.parallax-float-delay-3 { animation-delay: 3s; }
+.parallax-float-delay-4 { animation-delay: 4s; }
+.parallax-float-delay-5 { animation-delay: 5s; }
+
+/* Wave Separator */
+.wave-separator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.wave-separator svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 60px;
+}
+
+.wave-separator .shape-fill {
+    fill: currentColor;
+}
+
+/* Gradient Orb */
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    pointer-events: none;
+    animation: pulse-orb 8s ease-in-out infinite;
+}
+
+@keyframes pulse-orb {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.3; }
+}
+
+.gradient-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    top: -100px;
+    right: -100px;
+}
+
+.gradient-orb-2 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    bottom: -50px;
+    left: -50px;
+    animation-delay: -4s;
+}
+
+/* Card Parallax Hover */
+.parallax-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.parallax-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Section Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* Hero Section */
+.hero-parallax {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-parallax .content {
+    position: relative;
+    z-index: 10;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-10px); }
+    60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* Grid Pattern Background */
+.grid-pattern {
+    background-image: 
+        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+/* Dot Pattern */
+.dot-pattern {
+    background-image: radial-gradient(rgba(99, 102, 241, 0.15) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Gradient Border */
+.gradient-border {
+    position: relative;
+    background: white;
+    border-radius: 0.75rem;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 0.85rem;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gradient-border:hover::before {
+    opacity: 1;
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.2) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Mouse Follower */
+.mouse-follower {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.3);
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease, opacity 0.3s ease;
+    display: none;
+}
+
+@media (pointer: fine) {
+    .mouse-follower {
+        display: block;
+    }
+}
+
+/* Smooth Scroll Container */
+.smooth-scroll {
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+/* Parallax Speed Classes */
+.parallax-slow { transform: translateY(calc(var(--scroll-y) * 0.1)); }
+.parallax-medium { transform: translateY(calc(var(--scroll-y) * 0.2)); }
+.parallax-fast { transform: translateY(calc(var(--scroll-y) * 0.3)); }
+.parallax-reverse { transform: translateY(calc(var(--scroll-y) * -0.15)); }
+
+/* 3D Card Tilt */
+.tilt-card {
+    transform-style: preserve-3f;
+    transition: transform 0.3s ease;
+}
+
+.tilt-card:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateZ(10px);
+}
+
+/* ============================================
+   SIDEBAR MENU ANIMATIONS
+   ============================================ */
+
+/* Menu Button Styles */
+.menu-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-button:hover::before {
+    opacity: 1;
+}
+
+/* Menu Icon Animation */
+.menu-icon {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Menu Link Styles */
+.menu-link {
+    position: relative;
+    color: #6b7280;
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.menu-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 3px;
+    height: 60%;
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 0 2px 2px 0;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.menu-link:hover {
+    color: #6366f1;
+    background: rgba(99, 102, 241, 0.08);
+    transform: translateX(4px);
+}
+
+.menu-link:hover::before {
+    transform: translateY(-50%) scaleY(1);
+}
+
+/* Active Menu Link */
+.menu-link-active {
+    position: relative;
+    color: #6366f1;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.08));
+    font-weight: 600;
+    transform: translateX(4px);
+}
+
+.menu-link-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 0 2px 2px 0;
+}
+
+.menu-link-active::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
+    border-radius: 50%;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.5; }
+    50% { transform: translateY(-50%) scale(1.5); opacity: 0.8; }
+}
+
+/* Menu Animation - Scale & Rotate */
+@keyframes menu-pop {
+    0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.menu-button:active {
+    transform: scale(0.95);
+}
+
+/* Submenu Animation */
+[x-cloak] {
+    display: none !important;
+}
+
+/* Sidebar Parallax Container */
+.sidebar-parallax {
+    transition: transform 0.1s linear;
+}
+
+/* Menu Hover Sound Effect (Visual Only) */
+.menu-button:hover .menu-icon {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Scroll Progress Indicator */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+    z-index: 100;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+/* Enhanced scroll progress */
+.scroll-progress::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 30px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
+    animation: scroll-shine 2s infinite;
+}
+
+@keyframes scroll-shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    z-index: 50;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.scroll-to-top:active {
+    transform: translateY(0);
+}
+
+/* Ripple Effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.3);
+    transform: scale(0);
+    animation: ripple-effect 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Smooth Section Transitions */
+section {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+section.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+section.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Navigation Dots (Right Side) */
+.nav-dots {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(156, 163, 175, 0.4);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-dot:hover {
+    background: rgba(99, 102, 241, 0.6);
+    transform: scale(1.2);
+}
+
+.nav-dot.active {
+    background: #6366f1;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+.nav-dot::before {
+    content: attr(data-label);
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.nav-dot:hover::before {
+    opacity: 1;
+}
+
+.nav-dot.active {
+    background: #6366f1;
+    border-color: #6366f1;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+.nav-dot:hover {
+    transform: scale(1.3);
+    background: #8b5cf6;
+}
+
+@media (max-width: 1024px) {
+    .nav-dots {
+        display: none;
+    }
+}
+
+/* Glow Effects */
+.glow-primary {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.glow-primary-hover:hover {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
+}
+
+/* Animated Gradient Background */
+.animated-gradient {
+    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Workflow Arrow Animation */
+.workflow-arrow {
+    position: relative;
+    overflow: hidden;
+}
+
+.workflow-arrow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: workflow-slide 2s infinite;
+}
+
+@keyframes workflow-slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Pulse Ring Animation */
+.pulse-ring {
+    position: relative;
+}
+
+.pulse-ring::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    opacity: 0;
+    animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Number Badge Animation */
+.w-8.h-8.bg-indigo-500 {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Architecture Card Hover */
+.architecture-card {
+    transition: all 0.3s ease;
+}
+
+.architecture-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Flow Line Animation */
+.flow-line {
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(99, 102, 241, 0.5) 50%, 
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: flow-move 3s linear infinite;
+}
+
+@keyframes flow-move {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Step Animation */
+.step-item {
+    opacity: 0;
+    animation: step-fade-in 0.5s ease forwards;
+}
+
+.step-item:nth-child(1) { animation-delay: 0.1s; }
+.step-item:nth-child(2) { animation-delay: 0.2s; }
+.step-item:nth-child(3) { animation-delay: 0.3s; }
+.step-item:nth-child(4) { animation-delay: 0.4s; }
+.step-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes step-fade-in {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ============================================
+   FULL RESPONSIVE FIXES
+   ============================================ */
+
+/* Base responsive */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* Container */
+.max-w-4xl {
+    max-width: 100%;
+}
+
+.max-w-8xl {
+    max-width: 100%;
+}
+
+/* Header */
+header {
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+/* Sidebar */
+aside {
+    width: 16rem !important;
+    max-width: 100%;
+    max-height: calc(100vh - 3.5rem);
+    overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+    aside {
+        width: 18rem !important;
+        max-height: calc(100vh - 4rem);
+    }
+}
+
+/* Main content */
+main {
+    min-width: 0;
+    min-height: calc(100vh - 3.5rem);
+}
+
+@media (min-width: 768px) {
+    main {
+        min-height: calc(100vh - 4rem);
+    }
+}
+
+/* Sections */
+section {
+    scroll-margin-top: 5rem;
+    overflow-x: hidden;
+}
+
+/* Grid fixes */
+.grid {
+    overflow-wrap: break-word;
+}
+
+.grid-cols-2, 
+.grid-cols-3, 
+.grid-cols-4, 
+.grid-cols-5 {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+    .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .grid-cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .grid-cols-5 {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
+
+/* Code blocks */
+pre, code {
+    overflow-x: auto;
+    max-width: 100%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+pre {
+    display: block;
+}
+
+/* Tables */
+table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Flex fixes */
+.flex {
+    flex-wrap: wrap;
+}
+
+.flex-1 {
+    flex: 1 1 0%;
+    min-width: 0;
+}
+
+/* Spacing */
+.p-4, .p-6 {
+    padding: 1rem;
+}
+
+@media (min-width: 768px) {
+    .p-6 {
+        padding: 1.5rem;
+    }
+}
+
+.px-4, .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    .px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+.py-10 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .py-10 {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+}
+
+.space-y-20 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .space-y-20 > :not([hidden]) ~ :not([hidden]) {
+        margin-top: 5rem;
+    }
+}
+
+/* Typography */
+.text-3xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+@media (min-width: 768px) {
+    .text-3xl {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+}
+
+.text-4xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+@media (min-width: 768px) {
+    .text-4xl {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+    }
+}
+
+.text-xl {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .text-xl {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+}
+
+/* Hide on mobile */
+.hidden.md\:block {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .hidden.md\:block {
+        display: block;
+    }
+}
+
+.hidden.lg\:block {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .hidden.lg\:block {
+        display: block;
+    }
+}
+
+/* Parallax container */
+.parallax-container {
+    overflow: hidden;
+}
+
+/* Fix gradient backgrounds */
+.bg-gradient-to-br,
+.bg-gradient-to-r {
+    background-size: 200% 200%;
+}
+
+/* Performance */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global scrollbar - only applies where not overridden */
+/* Individual scrollbar styles are defined for main and aside */
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .hover\:scale-\[1\.02\]:hover {
+        transform: none;
+    }
+    
+    .hover\:shadow-lg:hover {
+        box-shadow: none;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Fix overflow */
+.overflow-x-auto {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Table responsive wrapper */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .table-responsive {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.table-responsive table {
+    min-width: 600px;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+/* Fix visible */
+.overflow-visible {
+    overflow: visible;
+}
+
+/* Fix rounded corners */
+.rounded-xl {
+    overflow: hidden;
+}
+
+/* Mobile sidebar overlay */
+@media (max-width: 767px) {
+    aside {
+        transform: translateX(-100%);
+    }
+    
+    aside.translate-x-0 {
+        transform: translateX(0);
+    }
+}
+
+/* Nav dots */
+.nav-dots {
+    display: none;
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 40;
+}
+
+@media (min-width: 1280px) {
+    .nav-dots {
+        display: flex;
+    }
+}
+
+.nav-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: #cbd5e1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.dark .nav-dot {
+    background-color: #475569;
+}
+
+.nav-dot.active {
+    background-color: #6366f1;
+    transform: scale(1.5);
+}
+
+.dark .nav-dot.active {
+    background-color: #818cf8;
+}
+
+.nav-dot::before {
+    content: attr(data-label);
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    color: #64748b;
+}
+
+.dark .nav-dot::before {
+    color: #94a3b8;
+}
+
+.nav-dot:hover::before {
+    opacity: 1;
+}
+
+/* Mouse follower */
+.mouse-follower {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(99, 102, 241, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background-color 0.3s;
+    mix-blend-mode: difference;
+}
+
+.dark .mouse-follower {
+    border-color: rgba(129, 140, 248, 0.5);
+}
+
+.mouse-follower:hover {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(99, 102, 241, 0.1);
+}
+
+/* Animated gradient background */
+.animated-gradient {
+    background: linear-gradient(
+        -45deg,
+        #6366f1,
+        #8b5cf6,
+        #ec4899,
+        #3b82f6,
+        #10b981
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Gradient orbs */
+.gradient-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.1;
+    z-index: -1;
+    animation: orbFloat 20s ease-in-out infinite;
+}
+
+.gradient-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent 70%);
+    top: -100px;
+    right: -100px;
+}
+
+.gradient-orb-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent 70%);
+    bottom: -50px;
+    left: -50px;
+    animation-delay: 10s;
+}
+
+@keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 30px) scale(0.9); }
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+    width: 0%;
+    z-index: 100;
+    transition: width 0.1s ease;
+}
+
+/* Reveal animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-2 {
+    transition-delay: 0.1s;
+}
+
+.reveal-delay-3 {
+    transition-delay: 0.2s;
+}
+
+/* Parallax float animations */
+.parallax-float {
+    animation: parallaxFloat 6s ease-in-out infinite;
+}
+
+.parallax-float-delay-1 {
+    animation-delay: 1s;
+}
+
+.parallax-float-delay-2 {
+    animation-delay: 2s;
+}
+
+@keyframes parallaxFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+/* Glow effects */
+.glow-primary-hover {
+    transition: box-shadow 0.3s ease;
+}
+
+.glow-primary-hover:hover {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+.dark .glow-primary-hover:hover {
+    box-shadow: 0 0 30px rgba(129, 140, 248, 0.4);
+}
+
+/* Container responsive */
+.container-responsive {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .container-responsive {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .container-responsive {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container-responsive {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+/* Max width 8xl */
+.max-w-8xl {
+    max-width: 88rem;
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    z-index: 50;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+}
+
+/* Touch auto for overlay */
+.touch-auto {
+    touch-action: auto;
+}
+
+/* Menu button animations */
+.menu-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-button:hover::before {
+    opacity: 1;
+}
+
+.menu-icon {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-button:hover .menu-icon {
+    transform: scale(1.1) rotate(3deg);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Menu link styles */
+.menu-link {
+    transition: all 0.2s ease;
+}
+
+.menu-link:hover {
+    background-color: rgba(99, 102, 241, 0.1);
+    transform: translateX(4px);
+}
+
+.menu-link-active {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+    border-left: 3px solid #6366f1;
+    padding-left: calc(0.75rem - 3px);
+    font-weight: 600;
+}
+
+.dark .menu-link-active {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.2), rgba(139, 92, 246, 0.2));
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 30;
+}
+
+/* Fix header height transitions */
+header {
+    transition: all 0.3s ease;
+}
+
+/* Main content area */
+main {
+    min-height: calc(100vh - 4rem);
+}
+
+/* Code block copy button */
+.copy-btn {
+    transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+    transform: translateY(-1px);
+}
+
+.copy-btn:active {
+    transform: translateY(0);
+}
+
+/* Focus visible for accessibility */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+    border-radius: 0.375rem;
+}
+
+.dark a:focus-visible,
+.dark button:focus-visible {
+    outline-color: #818cf8;
+}
+
+/* Print styles */
+@media print {
+    .mouse-follower,
+    .scroll-progress,
+    #back-to-top,
+    .scroll-to-top,
+    .nav-dots,
+    .gradient-orb,
+    .animated-gradient,
+    aside,
+    header {
+        display: none !important;
+    }
+    
+    main {
+        margin: 0;
+        padding: 0;
+    }
+}

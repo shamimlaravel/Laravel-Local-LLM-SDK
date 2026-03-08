@@ -1,0 +1,80 @@
+{
+    "name": "laravel-local-llm/sdk",
+    "description": "Modern Multi-Driver Local LLM Integration for Laravel",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "llm",
+        "ollama",
+        "lm-studio",
+        "local-ai",
+        "ai",
+        "openai"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laravel Local LLM SDK",
+            "email": "dev@example.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.0",
+        "illuminate/contracts": "^11.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^8.0 || ^9.0",
+        "phpstan/phpstan": "^1.10",
+        "mockery/mockery": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelLocalLlm\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaravelLocalLlm\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html coverage",
+        "analyse": "phpstan analyse --memory-limit=1G",
+        "analyse:baseline": "phpstan analyse --memory-limit=1G --generate-baseline",
+        "style": "pint",
+        "style:check": "pint --test",
+        "all": [
+            "@style:check",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "phpstan": {
+            "includes": [
+                "*.php"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelLocalLlm\\LocalLlmServiceProvider"
+            ],
+            "aliases": {
+                "LocalLlm": "LaravelLocalLlm\\Facades\\LocalLlm"
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+includes:
+    - vendor/phpstan/phpstan/confi/bleedingEdge.neon
+
+parameters:
+    level: max
+    
+    paths:
+        - src
+        
+    ignoreErrors:
+        # Ignore errors for Laravel facades and helpers that are available at runtime
+        - '#Call to an undefined static method Illuminate\\Support\\Facades\\.*#'
+        - '#Function (config|app|event|response|redirect|route|view|trans|auth|cookie|session|storage|info|error|warning|debug|logger|bcrypt|hash|encrypt|decrypt|blank|filled|class_uses_recursive)#'
+        - '#Call to function (config|app|event|response|redirect|route|view|trans|auth|cookie|session|storage|info|error|warning|debug|logger|bcrypt|hash|encrypt|decrypt|blank|filled|class_uses_recursive)#'
+        
+    excludePaths:
+        - tests
+        - vendor
+        
+    reportUnmatchedIgnoredErrors: true
+    
+    treatPhpDocTypesAsCertain: false
+    
+    # Enable features for PHP 8.4
+    phpVersion: 80400
+    
+    # Better reflection for Laravel models
+    universalObjectCratesClasses:
+        - Illuminate\Database\Eloquent\Model
+        - Illuminate\Http\Request
+        - Illuminate\Http\JsonResponse
+        
+    # Memory limit for analysis
+    memoryLimit: 1G
