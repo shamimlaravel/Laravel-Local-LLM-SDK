@@ -16,6 +16,7 @@ function app() {
             this.initDarkMode();
             this.initScrollState();
             this.initRevealObserver();
+            this.initBackToTop();
             if (window.innerWidth > 1024) this.setupMouseFollower();
             
             window.addEventListener('resize', debounce(() => this.handleResize(), 150));
@@ -38,6 +39,40 @@ function app() {
         
         updateScrollY() {
             this.scrollY = window.scrollY;
+            this.scrolled = window.scrollY > 20;
+            this.updateBackToTop();
+        },
+        
+        initBackToTop() {
+            const btn = document.getElementById('back-to-top');
+            if (!btn) return;
+            
+            // Initial visibility check
+            this.updateBackToTop();
+            
+            // Click handler with smooth scroll
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        },
+        
+        updateBackToTop() {
+            const btn = document.getElementById('back-to-top');
+            if (!btn) return;
+            
+            const shouldShow = window.scrollY > 300;
+            
+            if (shouldShow) {
+                btn.classList.remove('opacity-0', 'translate-y-4', 'invisible');
+                btn.classList.add('opacity-100', 'translate-y-0', 'visible');
+            } else {
+                btn.classList.add('opacity-0', 'translate-y-4', 'invisible');
+                btn.classList.remove('opacity-100', 'translate-y-0', 'visible');
+            }
         },
         
         initRevealObserver() {
@@ -98,16 +133,24 @@ function app() {
             if (!f) return;
             
             let mx = 0, my = 0, fx = 0, fy = 0;
+            let rafId = null;
             
-            document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-            
-            (function anim() {
-                fx += (mx - fx) * 0.1;
-                fy += (my - fy) * 0.1;
-                f.style.left = (fx - 10) + 'px';
-                f.style.top = (fy - 10) + 'px';
-                requestAnimationFrame(anim);
-            })();
+            // Use passive event listener for better scroll performance
+            document.addEventListener('mousemove', (e) => {
+                mx = e.clientX;
+                my = e.clientY;
+                
+                // Request animation frame only when needed
+                if (!rafId) {
+                    rafId = requestAnimationFrame(() => {
+                        fx += (mx - fx) * 0.1;
+                        fy += (my - fy) * 0.1;
+                        f.style.left = (fx - 10) + 'px';
+                        f.style.top = (fy - 10) + 'px';
+                        rafId = null;
+                    });
+                }
+            }, { passive: true });
         }
     };
 }
